@@ -1,0 +1,8 @@
+{
+  "use_case_name": "Marketing Campaign Manager",
+  "description": "A comprehensive marketing campaign management platform that allows users to create offerings, upload customer data, enrich data with company information, match customers with appropriate offerings, and send AI-powered personalized marketing messages. The system includes multi-step campaign wizard, data enrichment capabilities, campaign tracking, and detailed reporting functionality.",
+  "prompt": "Create a professional Marketing Campaign Manager web application with the following specific features:",
+  "user_id": "marketing_user_123",
+  "project_id": "marketing_campaign_manager",
+  "enable_auth": true
+}
