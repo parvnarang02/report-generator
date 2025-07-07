@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Campaign Manager</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+            line-height: 1.5;
+        }
+        
+        /* Slide Container */
+        .presentation {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+        
+        /* Individual Slide */
+        .slide {
+            width: 100%;
+            height: 720px;
+            padding: 50px;
+            background: white;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        h3 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        /* Layouts */
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .column {
+            width: 48%;
+            padding-right: 20px;
+        }
+        
+        /* Components */
+        .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card {
+            text-align: center;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            background: #eaf2fa;
+        }
+        
+        .metric-number {
+            font-size: 42px;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-left: 15px;
+        }
+        
+        .feature-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 18px;
+        }
+        
+        .feature-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background-color: #3498db;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 30px;
+        }
+        
+        .timeline-item {
+            padding: 0 0 30px 30px;
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+        
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #ddd;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .cta-container {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            padding: 30px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #3498db;
+            font-weight: 600;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .workflow-step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .accent-text {
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        .slide-header {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+        
+        .slide-header:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title & Overview -->
+        <div class="slide">
+            <h1>Marketing Campaign Manager</h1>
+            <p class="subtitle">A comprehensive platform for end-to-end marketing campaign management</p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Transform Your Marketing Strategy</h3>
+                    <p>Marketing Campaign Manager provides a complete solution for creating, executing, and analyzing personalized marketing campaigns at scale.</p>
+                    
+                    <div class="card">
+                        <h3>Enterprise Solution</h3>
+                        <p>Designed for marketing teams seeking to optimize campaign performance through data-driven personalization and streamlined workflows.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Key Benefits</h3>
+                        <ul class="feature-list">
+                            <li>Centralized campaign management</li>
+                            <li>Data enrichment and customer insights</li>
+                            <li>AI-powered personalization</li>
+                            <li>Comprehensive analytics and reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Current Challenges -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Current Marketing Challenges</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <h3>Fragmented Systems</h3>
+                        <p>Marketing teams struggle with disconnected tools for campaign creation, customer data management, and analytics.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Incomplete Customer Data</h3>
+                        <p>Limited visibility into customer profiles and company information leads to generic, ineffective messaging.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Manual Processes</h3>
+                        <p>Time-intensive campaign setup and customer segmentation reduce team productivity and delay campaign launches.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Personalization at Scale</h3>
+                        <p>Creating relevant, personalized content for different segments remains a significant challenge.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Measurement Difficulties</h3>
+                        <p>Lack of integrated analytics makes it difficult to attribute results and optimize future campaigns.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Resource Constraints</h3>
+                        <p>Limited marketing resources are stretched across multiple systems and manual processes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Key Features -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Key Platform Features</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <h3>Campaign Creation Wizard</h3>
+                        <p>Intuitive multi-step workflow for creating targeted marketing campaigns with predefined templates.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Customer Data Management</h3>
+                        <p>Upload, organize, and segment customer data within a centralized repository.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Automated Data Enrichment</h3>
+                        <p>Enhance customer profiles with company information and additional data points from integrated sources.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>AI-Powered Personalization</h3>
+                        <p>Generate tailored messaging based on customer attributes, behavior patterns, and engagement history.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Customer-Offering Matching</h3>
+                        <p>Smart algorithms to pair customers with the most relevant products and services.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Performance Analytics</h3>
+                        <p>Comprehensive reporting dashboards with campaign metrics and conversion tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Workflow -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Campaign Workflow</h2>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Create Campaign & Offerings</h3>
+                    <p>Define campaign parameters, timeline, and create product/service offerings with detailed attributes.</p>
+                </div>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Upload & Enrich Customer Data</h3>
+                    <p>Import customer lists and enhance profiles with additional company and behavioral data points.</p>
+                </div>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Customer-Offering Matching</h3>
+                    <p>Intelligent algorithms match customers to offerings based on profile data and propensity models.</p>
+                </div>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Generate Personalized Messages</h3>
+                    <p>AI tools create customized content for each customer segment based on matched offerings.</p>
+                </div>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Campaign Execution & Tracking</h3>
+                    <p>Deploy campaigns across channels and monitor performance in real-time dashboards.</p>
+                </div>
+            </div>
+            
+            <div class="workflow-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Analysis & Optimization</h3>
+                    <p>Review metrics, analyze results, and refine future campaigns based on insights.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Data Enrichment -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Data Enrichment Capabilities</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>From Basic Contact Data to Rich Customer Profiles</h3>
+                    <p>Our platform transforms limited customer data into comprehensive profiles that power effective personalization.</p>
+                    
+                    <div class="card">
+                        <h3>Company Information</h3>
+                        <ul class="feature-list">
+                            <li>Industry classification and vertical</li>
+                            <li>Company size and annual revenue</li>
+                            <li>Geographic footprint and locations</li>
+                            <li>Organizational structure</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Behavioral Insights</h3>
+                        <ul class="feature-list">
+                            <li>Previous engagement history</li>
+                            <li>Product interests and preferences</li>
+                            <li>Purchase patterns and lifecycle stage</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Data Sources</h3>
+                        <ul class="feature-list">
+                            <li>CRM integration (Salesforce, Dynamics)</li>
+                            <li>Third-party data providers</li>
+                            <li>Web tracking and engagement data</li>
+                            <li>Historical campaign performance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Profile Completion</h3>
+                        <p>Automated data enrichment increases profile completeness by an average of 65%, enabling more precise targeting and personalization.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Compliance & Privacy</h3>
+                        <p>Built-in GDPR and CCPA compliance tools ensure all data enrichment adheres to regulatory requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: AI Personalization -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>AI-Powered Personalization</h2>
+            </div>
+            
+            <p>Our advanced AI engine creates truly personalized marketing content that resonates with each customer segment.</p>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <h3>Content Generation</h3>
+                        <p>AI analyzes customer data to generate tailored messaging across multiple touchpoints:</p>
+                        <ul class="feature-list">
+                            <li>Email subject lines and body copy</li>
+                            <li>Product descriptions and value propositions</li>
+                            <li>Call-to-action phrasing and placement</li>
+                            <li>Landing page content customization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Tone & Style Matching</h3>
+                        <p>Adapts communication style based on industry, role, and previous engagement patterns to maximize relevance.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Personalization Variables</h3>
+                        <ul class="feature-list">
+                            <li>Individual customer attributes</li>
+                            <li>Company characteristics and needs</li>
+                            <li>Industry-specific pain points</li>
+                            <li>Position in the buying journey</li>
+                            <li>Previous interactions and preferences</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Continuous Learning</h3>
+                        <p>The AI system continuously improves based on campaign results, creating a virtuous cycle of optimization.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-number">37%</div>
+                <p>Average increase in engagement with AI-personalized content compared to generic messaging</p>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Implementation Timeline -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Implementation Timeline</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 1-2</div>
+                    <h3>Discovery & Setup</h3>
+                    <p>Requirements gathering, system configuration, and user account setup.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 3-4</div>
+                    <h3>Data Integration</h3>
+                    <p>Connect existing customer data sources, configure data enrichment parameters, and establish data flows.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 5-6</div>
+                    <h3>Platform Configuration</h3>
+                    <p>Configure campaign templates, personalization rules, and AI models based on business requirements.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 7</div>
+                    <h3>User Training</h3>
+                    <p>Comprehensive training for marketing team members across all platform features.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 8</div>
+                    <h3>Pilot Campaign</h3>
+                    <p>Launch initial campaign with close support to validate workflows and performance.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 9-10</div>
+                    <h3>Optimization & Refinement</h3>
+                    <p>Review pilot results, refine configurations, and prepare for full deployment.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 11+</div>
+                    <h3>Full Production & Ongoing Support</h3>
+                    <p>Complete rollout with regular check-ins and optimization sessions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Metrics / ROI -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Expected Metrics & ROI</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="metric-card">
+                        <div class="metric-number">45%</div>
+                        <p>Increase in campaign response rates</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-number">65%</div>
+                        <p>Reduction in campaign setup time</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-number">3.2x</div>
+                        <p>Higher conversion from lead to opportunity</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Efficiency Gains</h3>
+                        <ul class="feature-list">
+                            <li>70% reduction in manual data processing</li>
+                            <li>85% faster customer segmentation process</li>
+                            <li>40% decrease in campaign launch cycle time</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Financial Impact</h3>
+                        <ul class="feature-list">
+                            <li>20% increase in marketing-attributed revenue</li>
+                            <li>35% improvement in campaign ROI</li>
+                            <li>25% reduction in cost per acquisition</li>
+                            <li>18-month estimated payback period</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Business Impact -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Business Impact</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <h3>Marketing Effectiveness</h3>
+                        <ul class="feature-list">
+                            <li>Higher engagement through personalized messaging</li>
+                            <li>More precise targeting and segmentation</li>
+                            <li>Improved attribution and performance analysis</li>
+                            <li>Data-driven campaign optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Operational Excellence</h3>
+                        <ul class="feature-list">
+                            <li>Streamlined campaign management workflow</li>
+                            <li>Automated data enrichment and processing</li>
+                            <li>Reduced reliance on IT for marketing initiatives</li>
+                            <li>Cross-team collaboration and visibility</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Customer Experience</h3>
+                        <ul class="feature-list">
+                            <li>More relevant and timely communications</li>
+                            <li>Content that addresses specific needs and pain points</li>
+                            <li>Consistent messaging across customer journey</li>
+                            <li>Improved customer satisfaction metrics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Competitive Advantage</h3>
+                        <ul class="feature-list">
+                            <li>Faster time-to-market for new campaigns</li>
+                            <li>More efficient use of marketing resources</li>
+                            <li>Superior customer targeting capabilities</li>
+                            <li>Data-driven decision making at every level</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="accent-text" style="margin-top: 20px; text-align: center;">Transform your marketing approach from broad campaigns to precision-targeted, personalized customer engagement.</p>
+        </div>
+        
+        <!-- Slide 10: Call to Action -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Next Steps</h2>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <h3>Implementation Roadmap</h3>
+                        <ul class="feature-list">
+                            <li>Detailed needs assessment workshop</li>
+                            <li>Technical requirements documentation</li>
+                            <li>Custom implementation plan</li>
+                            <li>User training and enablement schedule</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Success Metrics</h3>
+                        <p>We'll work with your team to establish clear KPIs and success metrics for the platform implementation.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <h3>Available Resources</h3>
+                        <ul class="feature-list">
+                            <li>Technical documentation and API guides</li>
+                            <li>Case studies from similar implementations</li>
+                            <li>ROI calculator for your specific use case</li>
+                            <li>Dedicated implementation team</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-container">
+                <h3>Ready to Transform Your Marketing Campaigns?</h3>
+                <p>Schedule a personalized demonstration and consultation with our solutions team.</p>
+                <a href="#" class="cta-button">Request Demo</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

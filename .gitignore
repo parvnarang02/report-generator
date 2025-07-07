@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+*.log
+*.pptx
+*.pdf
+*.docx
+raw_agent_output.txt
+slides/
+input.json
