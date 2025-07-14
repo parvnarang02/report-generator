@@ -1,4 +1,4 @@
-##Business Report Generator
+## Business Report Generator
 
 This project automates the generation of professional business reports in **PDF**, **DOCX**, and **PPTX** formats using cutting-edge AI (Claude Sonnet 3.7), real-time web research via **Serper.dev**, and dynamic HTML rendering techniques. The reports are styled for executives and are grounded with **IEEE-style citations** sourced from live Google-like search results.
 
